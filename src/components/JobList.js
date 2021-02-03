@@ -1,33 +1,32 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
-import { debounce } from 'lodash'
 import RingLoader from 'react-spinners/RingLoader'
 
 
-function JobList() {
+function JobList({ match }) {
+
+  const location = match.params.location
 
   const [jobs, updateJobs] = useState([])
   const [filter, updateFilter] = useState('')
   const [loading, updateLoading] = useState(true)
 
-  const debouncedSave = debounce((query, updateJobs) => {
-    axios.get(`https://rickandmortyapi.com/api/job/?name=${query}`)
+  useEffect(() => {
+    axios.get(`https://cors-anywhere.herokuapp.com/https://jobs.github.com/positions.json?location=${location}`)
       .then(({ data }) => {
-        updateJobs(data.results)
+        updateJobs(data)
         updateLoading(false)
       })
-  }, 500)
+  }, [])
 
-  useEffect(() => {
-    debouncedSave(filter, updateJobs)
-  }, [filter])
 
   if (loading) {
     return <div className="container has-text-centered mt-6">
-      <RingLoader loading={loading} size={80} color={'aqua'}/>
+      <RingLoader loading={loading} size={80} color={'aqua'} />
     </div>
   }
+
 
   return <div>
     <div>
@@ -41,28 +40,32 @@ function JobList() {
     </div>
     <div className="section">
       <div className="container">
-        <div className="columns is-multiline">
+        <div className="rows">
           {jobs.map(job => {
+            const jobDate = new Date(job.created_at)
             return <Link key={job.id} to={`/job/${job.id}`}>
               <div className="card m-3">
                 <div className="card-content">
                   <div className="media">
                     <div className="media-content">
                       <h2 className="title is-4">
-                        {job.name.length >= 18
-                          ? job.name.slice(0, 18) + '...'
-                          : job.name
-                        }
+                        {job.title}
                       </h2>
                       <h2 className="subtitle is-5">
-                        {job.species}
+                        {job.company}
+                      </h2>
+                      <h2 className="subtitle is-5">
+                        {job.location}
+                      </h2>
+                      <h2 className="subtitle is-5">
+                        Job posted: {jobDate.toLocaleDateString()}
                       </h2>
                     </div>
                   </div>
                 </div>
                 <div className="card-image">
                   <figure className="image is-3by3">
-                    <img src={job.image} alt={job.name} />
+                    <img src={job.company_logo} alt={job.compnay} />
                   </figure>
                 </div>
               </div>
@@ -88,5 +91,6 @@ function JobList() {
     </footer>
   </div>
 }
+
 
 export default JobList

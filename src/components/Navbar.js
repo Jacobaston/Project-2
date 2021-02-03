@@ -6,17 +6,19 @@ export default function Navbar() {
     <div className="navbar-menu">
       <div className="navbar-start">
         <div className="navbar-item">
-          <Link to={'/'}><img src="./images/logo.png"></img></Link>
+          <Link to={'/project-2'}>Logo</Link>
         </div>
       </div>
       <div className="navbar-end">
         <div className="navbar-item">
           <div className="px-2">
-            <Link to={'/'}>Home</Link>
-          </div>
-          <div className="px-3">
-            <Link to={'/characters'}>Characters</Link>
-          </div>
+            <Link to={'/project-2'}>Home</Link>
+          </div> 
+        </div>
+        <div className="navbar-item">
+          <div className="px-2">
+            <Link to={'/project-2/job-list'}>Jobs List</Link>
+          </div> 
         </div>
       </div>
     </div>

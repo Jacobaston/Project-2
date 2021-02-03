@@ -7,7 +7,7 @@ function JobDetail({ match }) {
   const [job, updatejob] = useState({})
 
   useEffect(() => {
-    axios.get(`https://rickandmortyapi.com/api/job/${id}`)
+    axios.get(`https://cors-anywhere.herokuapp.com/https://jobs.github.com/positions.json?location=${location}`)
       .then(({ data }) => {
         updatejob(data)
       })
