@@ -6,6 +6,7 @@ import Home from './components/Home'
 import JobList from './components/JobList'
 import JobDetails from './components/JobDetail'
 import Navbar from './components/Navbar'
+import Congratulations from './components/Congratulations'
 // ? Styles
 import 'bulma'
 import './styles/style.scss'
@@ -15,9 +16,14 @@ const App = () => (
     <Navbar />
     <Switch>
       <Route exact path="/project-2" component={Home} />
-      <Route path="/project-2/job-list/:location" component={JobList} />
-      <Route path="/project-2/job-list/" component={JobList} />
+
+      <Route
+        path="/project-2/job-list/:location?/:description?/:page?"
+        render={props => <JobList key={props.location.key} {...props} />}
+      />
+
       <Route path="/project-2/job-detail/:id" component={JobDetails} />
+      <Route path="/project-2/congratulations" component={Congratulations}/>
     </Switch>
   </BrowserRouter>
 )
