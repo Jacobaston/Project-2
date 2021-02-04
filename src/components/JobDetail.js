@@ -66,7 +66,7 @@ function JobDetail({ match, location }) {
                 pathname: '/project-2/congratulations',
                 state: {
                   company: job.company,
-                  location: job.location,
+                  location: pass.location,
                   title: job.title,
                   decription: pass.decription,
                   logo: job.company_logo

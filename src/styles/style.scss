@@ -1,27 +1,54 @@
-.card-image{max-width:150px;padding:20px;}
-.navbar-item * {color:#ffffff;}
-.checkbox {margin: 0 15px 0 0;}
-.checkbox input {margin: 0 5px 0 0;}
-.button a{color:inherit;}
-.filtersearch{margin: 0 auto;}
-.hero{
-  background:linear-gradient(rgba(25, 35, 50, 0.5), rgba(25, 35, 50, 0.5)), url('https://i.ibb.co/yWpsyC2/jobs-background-3000.jpg');
+.card-image {
+  max-width: 150px;
+  padding: 20px;
+}
+.navbar {
+  padding: 10px 20px 10px 20px;
+}
+.navbar-item * {
+  color: #ffffff;
+}
+.checkbox {
+  margin: 0 15px 0 0;
+}
+.checkbox input {
+  margin: 0 5px 0 0;
+}
+.button a {
+  color: inherit;
+}
+.hero {
+  background: linear-gradient(rgba(25, 35, 50, 0.5), rgba(25, 35, 50, 0.5)),
+    url("https://i.ibb.co/yWpsyC2/jobs-background-3000.jpg");
   background-size: cover;
-
 }
 
-.hero .hero-body .container{max-width:400px;}
-
-
-::placeholder { 
-  color: #666666!important;
-  opacity: 1!important;
+.hero .hero-body .container {
+  max-width: 400px;
 }
 
-.card p{margin: 0 0 10px 0;}
-.card ul {list-style-type: disc;margin:5px 0 5px 30px;}
-.current {font-weight:bold;}
+::placeholder {
+  color: #666666 !important;
+  opacity: 1 !important;
+}
+
+.card p {
+  margin: 0 0 10px 0;
+}
+.card ul, .card ol {
+  margin: 5px 0 5px 30px;
+}
+.card ul {
+  list-style-type: disc;
+}
+.current {
+  font-weight: bold;
+}
 
 .float {
   float: right;
+}
+
+.section {
+  padding: 1.5rem 1.5rem 3rem 1.5rem;
 }

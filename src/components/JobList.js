@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 import RingLoader from 'react-spinners/RingLoader'
+import Paginate from './Paginate'
 
 function JobList({ match }) {
 
@@ -28,8 +29,8 @@ function JobList({ match }) {
     updatePageNum(newValue)
   }
 
-  function checkValues(event){
-    if (jobFilter === '' || locationFilter === ''){
+  function checkValues(event) {
+    if (jobFilter === '' || locationFilter === '') {
       alert('Please enter a job role and a location')
       event.preventDefault()
     }
@@ -40,19 +41,24 @@ function JobList({ match }) {
       <RingLoader loading={loading} size={80} color={'aqua'} />
     </div>
   } else if (!loading && !jobFilter && !locationFilter) {
-    return <div>
-      {input()}
-      <div className='notification is-warning'>Please enter some search criteria.</div>
+    return <div className="section">
+      <div className="container">
+        {input()}
+        <div className='mt-5 mx-3 box notification is-warning'>Please enter some search criteria.</div>
+      </div>
     </div>
   } else if (!loading && jobs.length === 0) {
-    return <div>
-      {input()}
-      <div className='notification is-warning'>Sorry, no jobs match your search.</div>
+    return <div className="section">
+      <div className="container">
+        {input()}
+        <div className='mt-5 mx-3 box notification is-warning'>
+          Sorry, no jobs match your search.</div>
+      </div>
     </div>
   }
 
   function input() {
-    return <div className='filtersearch mt-3 mb-3 mx-3'>
+    return <div className='mb-2 mx-3 box has-background-info'>
       <div className="columns is-vcentered">
         <div className="column is-centered">
           <input className="input"
@@ -72,7 +78,7 @@ function JobList({ match }) {
           />
         </div>
         <div className="column">
-          <button className="button is-link is-primary float">
+          <button className="button is-link is-light float">
             <Link to={`/project-2/job-list/${locationFilter ? locationFilter : ''}/${jobFilter ? jobFilter : ''}`} onClick={(event) => checkValues(event)}>Search</Link>
           </button>
         </div>
@@ -81,9 +87,9 @@ function JobList({ match }) {
   }
 
   return <div>
-    {input()}
     <div className="section">
       <div className="container">
+        {input()}
 
         <Paginate
           onChange={handleChange}
@@ -134,38 +140,17 @@ function JobList({ match }) {
             </Link>
           })}
         </div>
+        <Paginate
+          onChange={handleChange}
+          pageNum={pageNum}
+          totalResults={jobs.length}
+          resultsPerPage={resultsPerPage}
+          locationFilter={locationFilter}
+          jobFilter={jobFilter}
+        />
       </div>
-      <Paginate
-        onChange={handleChange}
-        pageNum={pageNum}
-        totalResults={jobs.length}
-        resultsPerPage={resultsPerPage}
-        locationFilter={locationFilter}
-        jobFilter={jobFilter}
-      />
     </div>
   </div >
-}
-
-function Paginate({ pageNum, totalResults, resultsPerPage, locationFilter, jobFilter }) {
-
-  if (totalResults > resultsPerPage) {
-    const pagesArray = []
-    for (let i = 0; i < Math.ceil(totalResults / resultsPerPage); i++) {
-      pagesArray.push(i + 1)
-    }
-    return <div className="pagination m-5" role="navigation" aria-label="pagination">
-      <p> Total results: {totalResults} </p>
-
-      <p>
-        {pagesArray.map(num => {
-          return <Link className={parseInt(num) === parseInt(pageNum) ? 'pagination-link  is-current' : 'pagination-link'} key={num} to={`/project-2/job-list/${locationFilter ? locationFilter : ''}/${jobFilter ? jobFilter : ''}/${num}`}>{num}</Link>
-        })}
-      </p>
-    </div>
-  } else {
-    return null
-  }
 }
 
 export default JobList
