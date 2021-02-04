@@ -4,10 +4,24 @@ import { Link } from 'react-router-dom'
 export default function Home() {
   const [jobFilter, updateJobFilter] = useState('')
   const [locationFilter, updateLocationFilter] = useState('')
+  const [hasDescription, updateHasDescription] = useState(true)
+  const [hasLocation, updateHasLocation] = useState(true)
 
   function checkValues(event){
-    if (jobFilter === '' || locationFilter === ''){
-      alert('Please enter a job role and a location')
+    updateHasDescription(true)
+    updateHasLocation(true)
+    if (jobFilter === '' && locationFilter === ''){
+      //alert('Please enter a job role and a location')
+      updateHasDescription(false)
+      updateHasLocation(false)
+      event.preventDefault()
+    } else if (jobFilter === ''){
+      //alert('Please enter a job role')
+      updateHasDescription(false)
+      event.preventDefault()
+    } else if (locationFilter === ''){
+      //alert('Please enter a location')
+      updateHasLocation(false)
       event.preventDefault()
     }
   }
@@ -19,7 +33,7 @@ export default function Home() {
             <img src='https://i.ibb.co/99cdxMy/github-jobs.png' alt='GitHub Jobs' className='pb-5' />
             <div className="field has-text-centered pb-2"> 
               <div className="control">
-                <input className="input is-size-4 has-text-centered"
+              <input className={hasLocation ? 'input is-size-4 has-text-centered' : 'input is-size-4 has-text-centered input is-danger'}
                   type="text"
                   placeholder="Job Title"
                   name='description'
@@ -30,7 +44,7 @@ export default function Home() {
             </div>
             <div className="field has-text-centered pb-2"> 
               <div className="control">
-                <input className="input is-size-4 has-text-centered"
+                <input className={hasLocation ? 'input is-size-4 has-text-centered' : 'input is-size-4 has-text-centered input is-danger'}
                   type="text"
                   placeholder="Location"
                   name='location'
