@@ -12,6 +12,8 @@ function JobList({ match }) {
   const [loading, updateLoading] = useState(true)
   const [jobFilter, updateJobFilter] = useState(match.params.description)
   const [locationFilter, updateLocationFilter] = useState(match.params.location)
+  const [hasDescription, updateHasDescription] = useState(true)
+  const [hasLocation, updateHasLocation] = useState(true)
 
   // https://stormy-atoll-29846.herokuapp.com/
   // https://cors-anywhere.herokuapp.com/
@@ -30,8 +32,17 @@ function JobList({ match }) {
   }
 
   function checkValues(event) {
-    if (jobFilter === '' || locationFilter === '') {
-      alert('Please enter a job role and a location')
+    if (jobFilter === '' && locationFilter === '') {
+      updateHasDescription(false)
+      updateHasLocation(false)
+      event.preventDefault()
+    } else if (jobFilter === '') {
+      updateHasLocation(true)
+      updateHasDescription(false)
+      event.preventDefault()
+    } else if (locationFilter === '') {
+      updateHasDescription(true)
+      updateHasLocation(false)
       event.preventDefault()
     }
   }
@@ -61,7 +72,7 @@ function JobList({ match }) {
     return <div className='mb-2 mx-3 box has-background-info'>
       <div className="columns is-vcentered">
         <div className="column is-centered">
-          <input className="input"
+          <input className={hasDescription ? 'input' : 'input is-danger'}
             type="text"
             placeholder="Job Title"
             name='description'
@@ -69,7 +80,7 @@ function JobList({ match }) {
             value={jobFilter}
           /></div>
         <div className="column">
-          <input className="input"
+          <input className={hasLocation ? 'input' : 'input is-danger'}
             type="text"
             placeholder="Location"
             name='location'
@@ -77,10 +88,8 @@ function JobList({ match }) {
             value={locationFilter}
           />
         </div>
-        <div className="column">
-          <button className="button is-link is-light float">
-            <Link to={`/project-2/job-list/${locationFilter ? locationFilter : ''}/${jobFilter ? jobFilter : ''}`} onClick={(event) => checkValues(event)}>Search</Link>
-          </button>
+        <div className="column"> 
+          <Link className="button is-link is-light float" to={`/project-2/job-list/${locationFilter ? locationFilter : ''}/${jobFilter ? jobFilter : ''}`} onClick={(event) => checkValues(event)}>Search</Link>
         </div>
       </div>
     </div>

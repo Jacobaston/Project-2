@@ -7,20 +7,17 @@ export default function Home() {
   const [hasDescription, updateHasDescription] = useState(true)
   const [hasLocation, updateHasLocation] = useState(true)
 
-  function checkValues(event){
-    updateHasDescription(true)
-    updateHasLocation(true)
-    if (jobFilter === '' && locationFilter === ''){
-      //alert('Please enter a job role and a location')
+  function checkValues(event) {
+    if (jobFilter === '' && locationFilter === '') {
       updateHasDescription(false)
       updateHasLocation(false)
       event.preventDefault()
-    } else if (jobFilter === ''){
-      //alert('Please enter a job role')
+    } else if (jobFilter === '') {
+      updateHasLocation(true)
       updateHasDescription(false)
       event.preventDefault()
-    } else if (locationFilter === ''){
-      //alert('Please enter a location')
+    } else if (locationFilter === '') {
+      updateHasDescription(true)
       updateHasLocation(false)
       event.preventDefault()
     }
@@ -30,10 +27,10 @@ export default function Home() {
       <div className="hero is-fullheight-with-navbar is-primary">
         <div className="hero-body">
           <div className="container has-text-centered">
-            <img src='https://i.ibb.co/99cdxMy/github-jobs.png' alt='GitHub Jobs' className='pb-5' />
-            <div className="field has-text-centered pb-2"> 
+            <img src='./images/github-jobs.png' alt='GitHub Jobs' className='pb-5' />
+            <div className="field has-text-centered pb-2">
               <div className="control">
-              <input className={hasLocation ? 'input is-size-4 has-text-centered' : 'input is-size-4 has-text-centered input is-danger'}
+                <input className={hasDescription ? 'input is-size-4 has-text-centered' : 'input is-size-4 has-text-centered input is-danger'}
                   type="text"
                   placeholder="Job Title"
                   name='description'
@@ -42,7 +39,7 @@ export default function Home() {
                 />
               </div>
             </div>
-            <div className="field has-text-centered pb-2"> 
+            <div className="field has-text-centered pb-2">
               <div className="control">
                 <input className={hasLocation ? 'input is-size-4 has-text-centered' : 'input is-size-4 has-text-centered input is-danger'}
                   type="text"
@@ -55,9 +52,7 @@ export default function Home() {
             </div>
             <div className="field is-fullwidth">
               <div className="control is-fullwidth">
-                <button className="button is-link is-primary is-size-4  has-text-centered is-fullwidth">
-                  <Link to={`/project-2/job-list/${locationFilter}/${jobFilter}/1`} onClick={(event) => checkValues(event)}>Search</Link>
-                </button>
+                <Link className="button is-link is-primary is-size-4  has-text-centered is-fullwidth" to={`/project-2/job-list/${locationFilter}/${jobFilter}/1`} onClick={(event) => checkValues(event)}>Search</Link>
               </div>
             </div>
 

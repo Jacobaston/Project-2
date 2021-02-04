@@ -14,9 +14,7 @@ function Congratulations({ location }) {
     <h1>Congratulations for applying at {pass.company} for the {pass.title} role</h1>
     <p>Plase keep an eye on your inbox for any updates in regard to your application</p>
     <p>Click return to continue your job search</p>
-    <button className="button is-link is-primary">
-      <Link to={`/project-2/job-list/${pass.location}/${pass.decription}`}>Return</Link>
-    </button>
+    <Link className="button is-link is-primary" to={`/project-2/job-list/${pass.location}/${pass.decription}`}>Return</Link>
   </div>
 }
 
