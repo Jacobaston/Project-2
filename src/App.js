@@ -17,7 +17,7 @@ const App = () => (
       <Route exact path="/project-2" component={Home} />
       <Route path="/project-2/job-list/:location" component={JobList} />
       <Route path="/project-2/job-list/" component={JobList} />
-      <Route exact path="/project-2/job-details/:id" component={JobDetails} />
+      <Route path="/project-2/job-detail/:id" component={JobDetails} />
     </Switch>
   </BrowserRouter>
 )

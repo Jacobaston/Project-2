@@ -1,45 +1,33 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
+import RingLoader from 'react-spinners/RingLoader'
+import JobList from './JobList'
 
 function JobDetail({ match }) {
   const id = match.params.id
 
-  const [job, updatejob] = useState({})
+  const [job, updatejob] = useState([])
+  const [loading, updateLoading] = useState(true)
+
 
   useEffect(() => {
-    axios.get(`https://cors-anywhere.herokuapp.com/https://jobs.github.com/positions.json?location=${location}`)
+    axios.get(`https://cors-anywhere.herokuapp.com/https://jobs.github.com/positions.${id}json`)
       .then(({ data }) => {
         updatejob(data)
+        updateLoading(false)
       })
   }, [])
 
-  if (!job.id) {
-    return null
+  console.log(job)
+
+  if (loading) {
+    return <div className="container has-text-centered mt-6">
+      <RingLoader loading={loading} size={80} color={'aqua'} />
+    </div>
   }
 
   return <div>
-    <div>
-      <h1 className="title has-text-centered">{job.name}</h1>
-    </div>
-    <div className="card">
-      <div className="card-image">
-        <figure className="image is-2by2">
-          <img src={job.image} />
-        </figure>
-      </div>
-      <div className="card-content">
-        <div className="media">
-          <div className="media-content">
-            <div className="subtitle is-5">
-              <div>Name: {job.name}</div>
-              <div>Species: {job.species}</div>
-              <div>Gender: {job.gender}</div>
-              <div className="is-capitalized">Origin: {job.origin.name}</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+    {job.title}
   </div>
 }
 

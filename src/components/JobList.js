@@ -43,7 +43,7 @@ function JobList({ match }) {
         <div className="rows">
           {jobs.map(job => {
             const jobDate = new Date(job.created_at)
-            return <Link key={job.id} to={`/job/${job.id}`}>
+            return <Link key={job.id} to={`/project-2/job-detail/${job.id}`}>
               <div className="card m-3">
                 <div className="card-content">
                   <div className="media">
