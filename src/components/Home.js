@@ -22,6 +22,14 @@ export default function Home() {
       event.preventDefault()
     }
   }
+
+  //function handleKeyPress(event) {
+  //  const key = event.keyCode
+  //  if (key === 13){
+  //    console.log('enter press here! ')
+  //  }
+  //}
+
   return <>
     <header>
       <div className="hero is-fullheight-with-navbar is-primary">
@@ -52,7 +60,14 @@ export default function Home() {
             </div>
             <div className="field is-fullwidth">
               <div className="control is-fullwidth">
-                <Link className="button is-link is-primary is-size-4  has-text-centered is-fullwidth" to={`/project-2/job-list/${locationFilter}/${jobFilter}/1`} onClick={(event) => checkValues(event)}>Search</Link>
+                <Link
+                  className="button is-link is-primary is-size-4  has-text-centered is-fullwidth"
+                  to={`/project-2/job-list/${locationFilter}/${jobFilter}/1`}
+                  onClick={(event) => checkValues(event)}
+                  //onKeyPress={handleKeyPress()}
+                >
+                Search
+                </Link>
               </div>
             </div>
 

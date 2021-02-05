@@ -77,9 +77,7 @@ function JobDetail({ match, location }) {
             </button>
           </div>
           <div>
-            <button className="button is-link is-primary ml-5 mb-5">
-              <Link to={`/project-2/job-list/${pass.location}/${pass.decription}`}>Return</Link>
-            </button>
+            <Link className="button is-link is-primary ml-5 mb-5" to={`/project-2/job-list/${pass.location}/${pass.decription}`}>Return</Link>
           </div>
         </div>
       </div>
