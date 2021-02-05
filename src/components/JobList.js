@@ -3,8 +3,11 @@ import axios from 'axios'
 import { Link } from 'react-router-dom'
 import RingLoader from 'react-spinners/RingLoader'
 import Paginate from './Paginate'
+import useEventListener from '@use-it/event-listener'
 
-function JobList({ match }) {
+const enterKey = ['13', 'Enter']
+
+function JobList({ match, history }) {
 
   const [resultsPerPage] = useState(5)
   const [pageNum, updatePageNum] = useState(match.params.page ? match.params.page : 1)
@@ -22,8 +25,13 @@ function JobList({ match }) {
       .then(({ data }) => {
         updateJobs(data)
         updateLoading(false)
-        //console.log(`Page: ${pageNum} Description: ${jobFilter} Location: ${locationFilter}`)
-        //console.log(data)
+      })
+      .catch((error) => {
+        if (error.response.status === 404) {
+          history.push('/project-2/error')
+        } else if (error.request) {
+          console.log(error.request)
+        } 
       })
   }, [])
 
@@ -35,17 +43,33 @@ function JobList({ match }) {
     if (jobFilter === '' && locationFilter === '') {
       updateHasDescription(false)
       updateHasLocation(false)
-      event.preventDefault()
+      if (event) {
+        event.preventDefault()
+      }
     } else if (jobFilter === '') {
       updateHasLocation(true)
       updateHasDescription(false)
-      event.preventDefault()
+      if (event) {
+        event.preventDefault()
+      }
     } else if (locationFilter === '') {
       updateHasDescription(true)
       updateHasLocation(false)
-      event.preventDefault()
+      if (event) {
+        event.preventDefault()
+      }
+    } else {
+      history.push(`/project-2/job-list/${locationFilter}/${jobFilter}/1`)
     }
   }
+
+  function handler({ key }) {
+    if (enterKey.includes(String(key))) {
+      checkValues()
+    }
+  }
+
+  useEventListener('keydown', handler)
 
   if (loading) {
     return <div className="container has-text-centered mt-6">
@@ -89,7 +113,7 @@ function JobList({ match }) {
           />
         </div>
         <div className="column"> 
-          <Link className="button is-link is-light float" to={`/project-2/job-list/${locationFilter ? locationFilter : ''}/${jobFilter ? jobFilter : ''}`} onClick={(event) => checkValues(event)}>Search</Link>
+          <button className="button is-link is-light float" onClick={(event) => checkValues(event)}>Search</button>
         </div>
       </div>
     </div>

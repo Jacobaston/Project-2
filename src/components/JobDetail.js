@@ -3,7 +3,7 @@ import axios from 'axios'
 import RingLoader from 'react-spinners/RingLoader'
 import { Link } from 'react-router-dom'
 
-function JobDetail({ match, location }) {
+function JobDetail({ match, location, history }) {
   const id = match.params.id
   const pass = location.state
 
@@ -19,6 +19,13 @@ function JobDetail({ match, location }) {
       .then(({ data }) => {
         updatejob(data)
         updateLoading(false)
+      })
+      .catch((error) => {
+        if (error.response.status === 404) {
+          history.push('/project-2/error')
+        } else if (error.request) {
+          console.log(error.request)
+        } 
       })
   }, [])
 

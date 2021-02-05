@@ -1,7 +1,12 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
+import useEventListener from '@use-it/event-listener'
 
-export default function Home() {
+const enterKey = ['13', 'Enter']
+
+
+
+export default function Home({ history }) {
   const [jobFilter, updateJobFilter] = useState('')
   const [locationFilter, updateLocationFilter] = useState('')
   const [hasDescription, updateHasDescription] = useState(true)
@@ -11,31 +16,42 @@ export default function Home() {
     if (jobFilter === '' && locationFilter === '') {
       updateHasDescription(false)
       updateHasLocation(false)
-      event.preventDefault()
+      if (event) {
+        event.preventDefault()
+      }
     } else if (jobFilter === '') {
       updateHasLocation(true)
       updateHasDescription(false)
-      event.preventDefault()
+      if (event) {
+        event.preventDefault()
+      }
     } else if (locationFilter === '') {
       updateHasDescription(true)
       updateHasLocation(false)
-      event.preventDefault()
+      if (event) {
+        event.preventDefault()
+      }
+    } else {
+      history.push(`/project-2/job-list/${locationFilter}/${jobFilter}/1`)
     }
   }
 
-  //function handleKeyPress(event) {
-  //  const key = event.keyCode
-  //  if (key === 13){
-  //    console.log('enter press here! ')
-  //  }
-  //}
+  function handler({ key }) {
+    if (enterKey.includes(String(key))) {
+      checkValues()
+    }
+  }
+
+  useEventListener('keydown', handler)
+
 
   return <>
     <header>
       <div className="hero is-fullheight-with-navbar is-primary">
         <div className="hero-body">
           <div className="container has-text-centered">
-            <img src='./images/github-jobs.png' alt='GitHub Jobs' className='pb-5' />
+            <h1>SEI JobSearch</h1>
+            <h2>Find your perfect job</h2>
             <div className="field has-text-centered pb-2">
               <div className="control">
                 <input className={hasDescription ? 'input is-size-4 has-text-centered' : 'input is-size-4 has-text-centered input is-danger'}
@@ -60,17 +76,11 @@ export default function Home() {
             </div>
             <div className="field is-fullwidth">
               <div className="control is-fullwidth">
-                <Link
-                  className="button is-link is-primary is-size-4  has-text-centered is-fullwidth"
-                  to={`/project-2/job-list/${locationFilter}/${jobFilter}/1`}
-                  onClick={(event) => checkValues(event)}
-                  //onKeyPress={handleKeyPress()}
-                >
-                Search
-                </Link>
+                <button className="button is-link is-primary is-size-4  has-text-centered is-fullwidth" onClick={(event) => checkValues(event)}>
+                  Search
+                </button>
               </div>
             </div>
-
           </div>
         </div>
       </div>

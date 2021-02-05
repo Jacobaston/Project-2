@@ -7,6 +7,7 @@ import JobList from './components/JobList'
 import JobDetails from './components/JobDetail'
 import Navbar from './components/Navbar'
 import Congratulations from './components/Congratulations'
+import Error from './components/Error'
 // ? Styles
 import 'bulma'
 import './styles/style.scss'
@@ -24,6 +25,7 @@ const App = () => (
 
       <Route path="/project-2/job-detail/:id" component={JobDetails} />
       <Route path="/project-2/congratulations" component={Congratulations}/>
+      <Route path="/project-2/error" component={Error} />
     </Switch>
   </BrowserRouter>
 )
