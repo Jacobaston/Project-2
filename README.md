@@ -5,7 +5,7 @@
 For our second project for the General Assembly Software Engineering Immersive course, we worked in pairs to built a simple jobs board using React. This accesses the public GitHub jobs API and returns a list of jobs matching the search criteria.
 
 ## The Brief
-- Must consumer a public API
+- Must consume a public API
 - Must have several components
 - The app should include a router
 - Wireframes to be complete before building the app
