@@ -20,6 +20,8 @@ function JobList({ match, history }) {
 
   // https://stormy-atoll-29846.herokuapp.com/
   // https://cors-anywhere.herokuapp.com/
+  // Fetch's API with props of ID passed throughh the URL to display a unique job post
+  // Catch check for any 404 issue with the API and redirects to Error page
   useEffect(() => {
     axios.get(`https://stormy-atoll-29846.herokuapp.com/https://jobs.github.com/positions.json?location=${locationFilter}&description=${jobFilter}`)
       .then(({ data }) => {
@@ -39,6 +41,8 @@ function JobList({ match, history }) {
     updatePageNum(newValue)
   }
 
+  // When search button is clicked or 'enter' key is pressed,
+  // check that jobFilter and locationFilter have values
   function checkValues(event) {
     if (jobFilter === '' && locationFilter === '') {
       updateHasDescription(false)
@@ -63,6 +67,7 @@ function JobList({ match, history }) {
     }
   }
 
+  // Allows users to use the 'enter' key to submit their input fields 
   function handler({ key }) {
     if (enterKey.includes(String(key))) {
       checkValues()
@@ -71,6 +76,8 @@ function JobList({ match, history }) {
 
   useEventListener('keydown', handler)
 
+  // Loading check if API data has been received - if not loading icon is displayed until data loads
+  // If input field hasn't been filled out an on secreen message is displayed propmting the user
   if (loading) {
     return <div className="container has-text-centered mt-6">
       <RingLoader loading={loading} size={80} color={'aqua'} />
@@ -92,6 +99,7 @@ function JobList({ match, history }) {
     </div>
   }
 
+  // Jobs search bar - allows users to update their job search from the initial search in the home page
   function input() {
     return <div className='mb-2 mx-3 box has-background-info'>
       <div className="columns is-vcentered">
@@ -119,6 +127,9 @@ function JobList({ match, history }) {
     </div>
   }
 
+  //Each individual job card displays job title, company name & logo, job location and date posted
+  // Each job posting is it own clickable link that takes the user through to more information about the job
+  // Pagination added via the paginate component and displayed at the top and bottom of each page
   return <div>
     <div className="section">
       <div className="container">

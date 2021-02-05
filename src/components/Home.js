@@ -1,10 +1,7 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
 import useEventListener from '@use-it/event-listener'
 
 const enterKey = ['13', 'Enter']
-
-
 
 export default function Home({ history }) {
   const [jobFilter, updateJobFilter] = useState('')
@@ -12,6 +9,8 @@ export default function Home({ history }) {
   const [hasDescription, updateHasDescription] = useState(true)
   const [hasLocation, updateHasLocation] = useState(true)
 
+  // When search button is clicked or 'enter' key is pressed,
+  // check that jobFilter and locationFilter have values
   function checkValues(event) {
     if (jobFilter === '' && locationFilter === '') {
       updateHasDescription(false)
@@ -36,6 +35,7 @@ export default function Home({ history }) {
     }
   }
 
+  // Allows users to use the 'enter' key to submit their input fields 
   function handler({ key }) {
     if (enterKey.includes(String(key))) {
       checkValues()
@@ -45,6 +45,8 @@ export default function Home({ history }) {
   useEventListener('keydown', handler)
 
 
+  // Logo and search form displayed in the center of the page,
+  // allows the user to input their search criteria and then be redirected to specific jobs list
   return <>
     <header>
       <div className="hero is-fullheight-with-navbar is-primary">

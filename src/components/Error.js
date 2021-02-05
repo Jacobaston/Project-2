@@ -1,6 +1,9 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
+// 404 Error catch
+// If API doesn't load the user will be redirected to this error page,
+// where they can then return to the home page and try the search again
 function Error() {
 
   return <div className="container has-text-centered mt-6">

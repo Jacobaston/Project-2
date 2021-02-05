@@ -14,6 +14,8 @@ function JobDetail({ match, location, history }) {
 
   // https://stormy-atoll-29846.herokuapp.com/
   // https://cors-anywhere.herokuapp.com/
+  // Fetch's API with props of ID passed throughh the URL to display a unique job post
+  // Catch check for any 404 issue with the API and redirects to Error page
   useEffect(() => {
     axios.get(`https://stormy-atoll-29846.herokuapp.com/https://jobs.github.com/positions/${id}.json`)
       .then(({ data }) => {
@@ -29,12 +31,16 @@ function JobDetail({ match, location, history }) {
       })
   }, [])
 
+  // Loading check if API data has been received - if not loading icon is displayed until data loads
   if (loading) {
     return <div className="container has-text-centered mt-6">
       <RingLoader loading={loading} size={80} color={'aqua'} />
     </div>
   }
 
+  // Job post displaying company name, logo, job title, date posted and description 
+  // 'dangerouslySetInnerHTML' used to dispaly inbuilt stylings within the API job description 
+  // Links to redirect user to either the application page or return to job search - history passed through props
   return <div className="section">
     <div className="container">
       <div className="rows">

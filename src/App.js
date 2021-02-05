@@ -12,6 +12,7 @@ import Error from './components/Error'
 import 'bulma'
 import './styles/style.scss'
 
+// Routes added through 'react-router-dom' in order to link each component to a unique url
 const App = () => (
   <BrowserRouter>
     <Navbar />
