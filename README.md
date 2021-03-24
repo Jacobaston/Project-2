@@ -4,6 +4,8 @@
 
 For our second project for the General Assembly Software Engineering Immersive course, we worked in pairs to built a simple jobs board using React. This accesses the public GitHub jobs API and returns a list of jobs matching the search criteria.
 
+Check it out [here](https://ikalff.github.io/project-2/)
+
 ## The Brief
 - Must consume a public API
 - Must have several components
