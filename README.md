@@ -20,7 +20,7 @@ Check it out [here](https://ikalff.github.io/project-2/)
 - React.JS
 - Git and GitHub
 
-![screenshot](./images/screenshot.png)
+![screenshot](src/images/screenshot.png)
 
 # The Approach
 
