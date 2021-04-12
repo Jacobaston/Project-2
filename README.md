@@ -20,9 +20,9 @@ Check it out [here](https://ikalff.github.io/project-2/)
 - React.JS
 - Git and GitHub
 
-![screenshot](src/images/screenshot.png)
-
 # The Approach
+
+![screenshot](src/images/screenshot.png)
 
 ## Planning
 Before beginning the task, we drew some rough wireframes and made a list of the basic requirements for our MVP, plus a list of additional features we would like to add once the basic requirements had been met. These included pagination and the ability to save jobs to a shortlist.
@@ -101,5 +101,13 @@ export default function Paginate({ pageNum, totalResults, resultsPerPage, locati
 }
 ```
 
-## Future Improvements
-We discussed a number of potential future improvements to this project, including adding the ability to save jobs to a shortlist. We could also explore different ways of handling the search form validation, and include more search criteria to filter by.
+# Conclusion
+
+## Challenges 
+- This was my frist experience of pair programming. Our first challenge was deciding how we were going to split up the workload and keep our code clean and readable. We decided that the best way to go this was us the live share feature on VS code - this allowed us to work on problems together at the same time, while also allowing us to work on our own sections too.
+
+### Future Improvements
+- We discussed a number of potential future improvements to this project, including adding the ability to save jobs to a shortlist. We could also explore different ways of handling the search form validation, and include more search criteria to filter by.
+
+## Lessons learned
+- 
