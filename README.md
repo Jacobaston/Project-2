@@ -28,5 +28,76 @@ Before beginning the task, we drew some rough wireframes and made a list of the 
 ## Implementation
 We started by setting up a simple site structure using React router, including a home page, results page and a page to display more detailed information on a single job. We used Axios to fetch data from the API, and mapped over this to output the results. We included a loading graphic which appears while the data is being fetched, an error page which appears if the data can not be retrieved, and pagination to split the results into pages.
 
+React Router:
+``` js
+const App = () => (
+  <BrowserRouter>
+    <Navbar />
+    <Switch>
+      <Route exact path="/project-2" component={Home} />
+
+      <Route
+        path="/project-2/job-list/:location?/:description?/:page?"
+        render={props => <JobList key={props.location.key} {...props} />}
+      />
+
+      <Route path="/project-2/job-detail/:id" component={JobDetails} />
+      <Route path="/project-2/congratulations" component={Congratulations}/>
+      <Route path="/project-2/error" component={Error} />
+    </Switch>
+  </BrowserRouter>
+)
+```
+
+Axios:
+``` js
+  useEffect(() => {
+    axios.get(`https://stormy-atoll-29846.herokuapp.com/https://jobs.github.com/positions.json?location=${locationFilter}&description=${jobFilter}`)
+      .then(({ data }) => {
+        updateJobs(data)
+        updateLoading(false)
+      })
+      .catch((error) => {
+        if (error.response.status === 404) {
+          history.push('/project-2/error')
+        } else if (error.request) {
+          console.log(error.request)
+        } 
+      })
+  }, [])
+```
+
+Pagination:
+```js
+export default function Paginate({ pageNum, totalResults, resultsPerPage, locationFilter, jobFilter }) {
+
+  // include pagination if there are multiple pages of results
+  if (totalResults > resultsPerPage) {
+
+    // create an array of pages that we can map over
+    const pagesArray = []
+    for (let i = 0; i < Math.ceil(totalResults / resultsPerPage); i++) {
+      pagesArray.push(i + 1)
+    }
+
+    // map over the pages array to output the page number buttons
+    return <div className="pagination m-5" role="navigation" aria-label="pagination">
+      <p> Total results: {totalResults} </p>
+      <p>
+        {pagesArray.map(num => {
+          return <Link className={parseInt(num) === parseInt(pageNum) ? 'pagination-link  is-current' : 'pagination-link'} key={num} to={`/project-2/job-list/${locationFilter ? locationFilter : ''}/${jobFilter ? jobFilter : ''}/${num}`}>{num}</Link>
+        })}
+      </p>
+    </div>
+
+  } else {
+    // if there is only one page, just show the number of results
+    return <div className="pagination m-5" role="navigation" aria-label="pagination">
+      <p> Total results: {totalResults} </p>
+    </div>
+  }
+}
+```
+
 ## Future Improvements
 We discussed a number of potential future improvements to this project, including adding the ability to save jobs to a shortlist. We could also explore different ways of handling the search form validation, and include more search criteria to filter by.
