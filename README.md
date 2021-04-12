@@ -105,9 +105,11 @@ export default function Paginate({ pageNum, totalResults, resultsPerPage, locati
 
 ## Challenges 
 - This was my frist experience of pair programming. Our first challenge was deciding how we were going to split up the workload and keep our code clean and readable. We decided that the best way to go this was us the live share feature on VS code - this allowed us to work on problems together at the same time, while also allowing us to work on our own sections too.
+- We chose to use a CSS framework rather than stick to pure CSS - this was a bit of a learning curve as netiher of us had used a CSS framework before. We selcted Bluma as we felt this has good documentation so would be eaiser to impliment compared to other frameworks out there.
 
 ### Future Improvements
 - We discussed a number of potential future improvements to this project, including adding the ability to save jobs to a shortlist. We could also explore different ways of handling the search form validation, and include more search criteria to filter by.
 
 ## Lessons learned
-- 
+- Team work makes the dream work. We found that splitting the work up into bitesize chucks really helped with the time-management of this project. As this only had 48 hours to complete this project this was very important to get on top of.
+- Pagination was something neither of us has tackeled before, so reading around this was integral into order to get this up and running.
