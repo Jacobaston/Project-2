@@ -101,6 +101,8 @@ export default function Paginate({ pageNum, totalResults, resultsPerPage, locati
 }
 ```
 
+For the job search we decided that we wanted users to be able to update their serach without having to go back to the inital home screen. 
+
 # Conclusion
 
 ## Challenges 
