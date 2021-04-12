@@ -20,7 +20,7 @@ Check it out [here](https://ikalff.github.io/project-2/)
 - React.JS
 - Git and GitHub
 
-![screenshot](https://res.cloudinary.com/dj87j2nvi/image/upload/v1617225185/Job_search_yaadix.png)
+![screenshot](../images/screenshot.png)
 
 # The Approach
 
